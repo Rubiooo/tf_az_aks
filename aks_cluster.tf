@@ -56,33 +56,6 @@ resource "azurerm_kubernetes_cluster" "project_aks_cluster" {
     type = "SystemAssigned" 
   }
 
-#   addon_profile {
-  
-#     http_application_routing {
-#       enabled = false
-#     }
-#   }
-
-#   role_based_access_control {
-#     enabled = true
-
-#     #
-#     # Refer to: https://docs.microsoft.com/en-us/azure/aks/aad-integration
-#     # for more info on the AzureAD auth integration
-#     #
-#     azure_active_directory {
-#       client_app_id     = data.azuread_application.aks_aad_client_authid.application_id
-#       server_app_id     = data.azuread_application.aks_aad_server_authid.application_id
-#       server_app_secret = data.azurerm_key_vault_secret.aks_aad_server_secret.value
-#       tenant_id         = data.azurerm_client_config.current.tenant_id
-#     }
-#   }
-
-#   service_principal {
-#     client_id     = data.azuread_service_principal.service_principal.application_id
-#     client_secret = data.azurerm_key_vault_secret.project_admin_secret.value
-#   }
-# }
 }
 
 resource "local_file" "kube_conf" {
@@ -90,19 +63,3 @@ resource "local_file" "kube_conf" {
   filename = coalesce("${path.module}/kube_config", "${var.cache_dir}/kube_config")
 }
 
-# resource "local_file" "aks_ad_sp_credentials" {
-#   filename = coalesce(
-#     "${path.module}/aks_service_principal.json",
-#     "${var.cache_dir}/aks_service_principal.json",
-#   )
-
-#   content = jsonencode(
-#     {
-#       "AZURE_CLIENT_ID"       = data.azuread_service_principal.service_principal.application_id
-#       "AZURE_CLIENT_SECRET"   = data.azurerm_key_vault_secret.project_admin_secret.value
-#       "AZURE_SUBSCRIPTION_ID" = data.azurerm_client_config.current.subscription_id
-#       "AZURE_TENANT_ID"       = data.azurerm_client_config.current.tenant_id
-#       "AZURE_RESOURCE_GROUP"  = format("%s-%s-dns", local.project_name, var.environment_name)
-#     },
-#   )
-# }

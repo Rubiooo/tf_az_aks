@@ -41,14 +41,6 @@ data "azurerm_subnet" "project_subnets" {
   resource_group_name  = local.vnet_resource_group
 }
 
-# data "azuread_application" "aks_aad_server_authid" {
-#   name = var.aks_aad_server_authid
-# }
-
-# data "azuread_application" "aks_aad_client_authid" {
-#   name = var.aks_aad_client_authid
-# }
-
 data "azurerm_key_vault" "project_vault" {
   name                = var.keyvault_id
   resource_group_name = var.keyvault_resource_group
@@ -59,26 +51,8 @@ data "azurerm_key_vault_secret" "ssh_public_key" {
   key_vault_id = data.azurerm_key_vault.project_vault.id
 }
 
-# data "azurerm_key_vault_secret" "aks_aad_server_secret" {
-#   name      = var.aks_aad_server_secret
-#   key_vault_id = data.azurerm_key_vault.project_vault.id
-# }
-
-# data "azurerm_key_vault_secret" "aks_aad_client_secret" {
-#   name      = var.aks_aad_client_secret
-#   key_vault_id = data.azurerm_key_vault.project_vault.id
-# }
-
 data "azurerm_key_vault_secret" "project_admin_secret" {
   name      = var.project_admin_secret
   key_vault_id = data.azurerm_key_vault.project_vault.id
 }
 
-# data "azuread_service_principal" "service_principal" {
-#   display_name = var.aks_sp_display_name
-# }
-
-# data "azurerm_log_analytics_workspace" "workspace_block" {
-#   name                = var.log_analytics_workspace_name
-#   resource_group_name = var.log_resource_group_name
-# }
