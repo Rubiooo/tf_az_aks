@@ -18,4 +18,4 @@ AKS Cluster v1
 
 4. Terraform apply -var-file=./vars/<environment>.tfvars 
 
-5. kubectl get nodes --kubeconfig ./kube-config
+5. kubectl get nodes --kubeconfig ./kube_config

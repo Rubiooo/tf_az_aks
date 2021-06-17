@@ -20,10 +20,6 @@ locals {
 # Lookups
 #
 
-data "azurerm_resource_group" "aks_resource_group" {
-  name = var.aks_resource_group
-}
-
 data "azurerm_client_config" "current" {
 }
 
